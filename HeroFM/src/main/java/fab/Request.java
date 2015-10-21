@@ -3,12 +3,12 @@ package fab;
 import unit.*;
 
 public class Request {
-	Tool source, destination;
+	Unit source, destination;
 	int prio;
 	
-	public Request(Tool source_, Tool destination_, int prio_) {
-		source=source_;
-		destination=destination_;
+	public Request(Unit unit, Unit unit2, int prio_) {
+		source=unit;
+		destination=unit2;
 		prio=prio_;
 	}
 	
