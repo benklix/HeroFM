@@ -34,9 +34,14 @@ import jsprit.core.reporting.SolutionPrinter;
 import jsprit.core.util.Coordinate;
 import jsprit.core.util.Solutions;
 import jsprit.util.Examples;
+import unit.Unit;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+
+import fab.Layout;
+import fab.Request;
 
 
 public class Example {
@@ -51,22 +56,27 @@ public class Example {
 		 * get a vehicle type-builder and build a type with the typeId "vehicleType" and a capacity of 2
 		 */
 		int vehicleCap = 4;
-		VehicleTypeImpl.Builder vehicleTypeBuilder = VehicleTypeImpl.Builder.newInstance("vehicleType").addCapacityDimension(0, vehicleCap);
-		vehicleTypeBuilder.setCostPerDistance(1.0);
+		VehicleTypeImpl.Builder vehicleTypeBuilder = VehicleTypeImpl.Builder.newInstance("heroFAB").addCapacityDimension(0, vehicleCap);
+		vehicleTypeBuilder.setCostPerDistance(1.0).setCostPerTime(1.0);
 		VehicleType vehicleType = vehicleTypeBuilder.build();
+		
+		/*
+		 * generate the current FAB layout
+		 */
+		Layout fabLayout = new Layout();
 		
 		/*
 		 * define two vehicles and their start-locations 
 		 * 
 		 * they need to return to depot
 		 */
-		Builder vehicleBuilder1 = VehicleImpl.Builder.newInstance("vehicles@[10,10]");
-		vehicleBuilder1.setStartLocation(loc(Coordinate.newInstance(10, 10))).setReturnToDepot(false);
+		Builder vehicleBuilder1 = VehicleImpl.Builder.newInstance("hero-01");
+		vehicleBuilder1.setStartLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(3), fabLayout.getToolCoordY(3)))).setReturnToDepot(false);
 		vehicleBuilder1.setType(vehicleType);
 		VehicleImpl vehicle1 = vehicleBuilder1.build();
 		
-		Builder vehicleBuilder2 = VehicleImpl.Builder.newInstance("vehicles@[30,30]");
-		vehicleBuilder2.setStartLocation(loc(Coordinate.newInstance(30, 30))).setReturnToDepot(false);
+		Builder vehicleBuilder2 = VehicleImpl.Builder.newInstance("hero-02");
+		vehicleBuilder2.setStartLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(9), fabLayout.getToolCoordY(9)))).setReturnToDepot(false);
 		vehicleBuilder2.setType(vehicleType);
 		VehicleImpl vehicle2 = vehicleBuilder2.build();
 		
@@ -75,39 +85,37 @@ public class Example {
 		 *
 		 */
 		
-		Shipment shipment1 = Shipment.Builder.newInstance("1").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(5, 7))).setDeliveryLocation(loc(Coordinate.newInstance(6, 9))).build();
-		Shipment shipment2 = Shipment.Builder.newInstance("2").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(5, 13))).setDeliveryLocation(loc(Coordinate.newInstance(6, 11))).build();
+		/*
+		 * TODO build a job-list
+		 * this job-list generates the Shipments
+		 */
+		ArrayList<Request> requestList = new ArrayList<Request>();
+		requestList.add(new Request(fabLayout.getToolAt(2), fabLayout.getToolAt(0), 1));
 		
-		Shipment shipment3 = Shipment.Builder.newInstance("3").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(15, 7))).setDeliveryLocation(loc(Coordinate.newInstance(14, 9))).build();
-		Shipment shipment4 = Shipment.Builder.newInstance("4").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(15, 13))).setDeliveryLocation(loc(Coordinate.newInstance(14, 11))).build();
+		Shipment shipment1 = Shipment.Builder.newInstance(requestList.get(0).getSource().getName()+" to "+requestList.get(0).getDestination().getName()).addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(3), fabLayout.getToolCoordY(3)))).setDeliveryLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(1), fabLayout.getToolCoordY(1)))).build();
+		Shipment shipment2 = Shipment.Builder.newInstance("2").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(3), fabLayout.getToolCoordY(3)))).setDeliveryLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(4), fabLayout.getToolCoordY(4)))).build();
 		
-		Shipment shipment5 = Shipment.Builder.newInstance("5").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(25, 27))).setDeliveryLocation(loc(Coordinate.newInstance(26, 29))).build();
-		Shipment shipment6 = Shipment.Builder.newInstance("6").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(25, 33))).setDeliveryLocation(loc(Coordinate.newInstance(26, 31))).build();
+		Shipment shipment3 = Shipment.Builder.newInstance("3").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(3), fabLayout.getToolCoordY(3)))).setDeliveryLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(5), fabLayout.getToolCoordY(5)))).build();
+		Shipment shipment4 = Shipment.Builder.newInstance("4").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(3), fabLayout.getToolCoordY(3)))).setDeliveryLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(7), fabLayout.getToolCoordY(7)))).build();
 		
-		Shipment shipment7 = Shipment.Builder.newInstance("7").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(35, 27))).setDeliveryLocation(loc(Coordinate.newInstance(34, 29))).build();
-		Shipment shipment8 = Shipment.Builder.newInstance("8").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(35, 33))).setDeliveryLocation(loc(Coordinate.newInstance(34, 31))).build();
+		Shipment shipment5 = Shipment.Builder.newInstance("5").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(4), fabLayout.getToolCoordY(4)))).setDeliveryLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(3), fabLayout.getToolCoordY(3)))).build();
+		Shipment shipment6 = Shipment.Builder.newInstance("6").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(4), fabLayout.getToolCoordY(4)))).setDeliveryLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(5), fabLayout.getToolCoordY(5)))).build();
 		
-		Shipment shipment9 = Shipment.Builder.newInstance("9").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(5, 27))).setDeliveryLocation(loc(Coordinate.newInstance(6, 29))).build();
-		Shipment shipment10 = Shipment.Builder.newInstance("10").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(5, 33))).setDeliveryLocation(loc(Coordinate.newInstance(6, 31))).build();
+		Shipment shipment7 = Shipment.Builder.newInstance("7").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(6), fabLayout.getToolCoordY(6)))).setDeliveryLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(2), fabLayout.getToolCoordY(2)))).build();
+		Shipment shipment8 = Shipment.Builder.newInstance("8").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(7), fabLayout.getToolCoordY(7)))).setDeliveryLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(1), fabLayout.getToolCoordY(1)))).build();
 		
-		Shipment shipment11 = Shipment.Builder.newInstance("11").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(15, 27))).setDeliveryLocation(loc(Coordinate.newInstance(14, 29))).build();
-		Shipment shipment12 = Shipment.Builder.newInstance("12").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(15, 33))).setDeliveryLocation(loc(Coordinate.newInstance(14, 31))).build();
+		Shipment shipment9 = Shipment.Builder.newInstance("9").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(7), fabLayout.getToolCoordY(7)))).setDeliveryLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(8), fabLayout.getToolCoordY(8)))).build();
+		Shipment shipment10 = Shipment.Builder.newInstance("10").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(9), fabLayout.getToolCoordY(9)))).setDeliveryLocation(loc(Coordinate.newInstance(fabLayout.getToolCoordX(2), fabLayout.getToolCoordY(2)))).build();
 		
-		Shipment shipment13 = Shipment.Builder.newInstance("13").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(25, 7))).setDeliveryLocation(loc(Coordinate.newInstance(26, 9))).build();
-		Shipment shipment14 = Shipment.Builder.newInstance("14").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(25, 13))).setDeliveryLocation(loc(Coordinate.newInstance(26, 11))).build();
-		
-		Shipment shipment15 = Shipment.Builder.newInstance("15").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(35, 7))).setDeliveryLocation(loc(Coordinate.newInstance(34, 9))).build();
-		Shipment shipment16 = Shipment.Builder.newInstance("16").addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(35, 13))).setDeliveryLocation(loc(Coordinate.newInstance(34, 11))).build();
-		
-		
+				
 		VehicleRoutingProblem.Builder vrpBuilder = VehicleRoutingProblem.Builder.newInstance();
 		vrpBuilder.addVehicle(vehicle1).addVehicle(vehicle2);
 		vrpBuilder.addJob(shipment1).addJob(shipment2).addJob(shipment3).addJob(shipment4);
 		vrpBuilder.addJob(shipment5).addJob(shipment6).addJob(shipment7).addJob(shipment8);
-		vrpBuilder.addJob(shipment9).addJob(shipment10).addJob(shipment11).addJob(shipment12);
-		vrpBuilder.addJob(shipment13).addJob(shipment14).addJob(shipment15).addJob(shipment16);
+		vrpBuilder.addJob(shipment9).addJob(shipment10);
 		
 		vrpBuilder.setFleetSize(FleetSize.FINITE);
+		
 		VehicleRoutingProblem problem = vrpBuilder.build();
 		
 		/*
