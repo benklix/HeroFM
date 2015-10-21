@@ -7,56 +7,73 @@ import unit.*;
 
 public class Layout {
 	
-	ArrayList<Unit> units = new ArrayList<Unit>();
+	ArrayList<Unit> toolList = new ArrayList<Unit>();
 	
+	Tool tool1 = new Tool("1-FOT", 0, new Position(10,10));
+	Tool tool2 = new Tool("2-FOT", 1, new Position(40,10));
 	
-	Tool tool1 = new Tool("Tool-1", 0, new Position(0,3));
-	Tool tool2 = new Tool("Tool-2", 1, new Position(3,3));
-	Tool tool3 = new Tool("Tool-3", 2, new Position(4,2));
-	Tool tool4 = new Tool("Tool-4", 3, new Position(4,0));
-	Tool tool5 = new Tool("Tool-5", 4, new Position(3,0));
-	Tool tool6 = new Tool("Tool-6", 5, new Position(2,0));
-	Tool tool7 = new Tool("Tool-7", 6, new Position(0,0));
-	Tool tool8 = new Tool("Tool-8", 7, new Position(0,1));
+	Tool tool3 = new Tool("3-FOT", 2, new Position(100,10));
+	Tool tool4 = new Tool("4-ETCH", 3, new Position(100,40));
 	
-	Vehicle hero1 = new Vehicle("Hero-1", 1, tool5.getPos());
-	Vehicle hero2 = new Vehicle("Hero-2", 2, tool8.getPos());
+	Tool tool5 = new Tool("5-ETCH", 4, new Position(40,40));
+	Tool tool6 = new Tool("6-BUF", 5, new Position(10,40));
 	
+	Tool tool7 = new Tool("7-BUF", 6, new Position(10,100));
+	Tool tool8 = new Tool("8-WASH", 7, new Position(70,100));
+	
+	Tool tool9 = new Tool("9-MEAS", 8, new Position(100,100));
+		
 	WeightedUndirectedGraph g;
 
 	public Layout() {
-//		units.add(hero1);
-//		units.add(hero2);
-		units.add(tool1);
-		units.add(tool2);
-		units.add(tool3);
-		units.add(tool4);
-		units.add(tool5);
-		units.add(tool6);
-		units.add(tool7);
-		units.add(tool8);
-
-		g = new WeightedUndirectedGraph(units.size());
+		
+		fillToolList();
+		g = new WeightedUndirectedGraph(toolList.size());
 		// TODO create the graph automatically
-		for(int i=0; i<units.size(); i++){
-			for(int j=0; j<units.size(); j++){
-				g.setWeight(units.get(i).getIndex(), units.get(j).getIndex(), getDistance(units.get(i),units.get(j)));
+		for(int i=0; i<toolList.size(); i++){
+			for(int j=0; j<toolList.size(); j++){
+				g.setWeight(toolList.get(i).getIndex(), toolList.get(j).getIndex(), getDistance(toolList.get(i),toolList.get(j)));
 			}
 		}
 
 	}
 
-	protected Double getDistance(Unit source, Unit destination) {
+	private void fillToolList() {
+		toolList.add(tool1);
+		toolList.add(tool2);
+		toolList.add(tool3);
+		toolList.add(tool4);
+		toolList.add(tool5);
+		toolList.add(tool6);
+		toolList.add(tool7);
+		toolList.add(tool8);
+		toolList.add(tool9);
+	}
+
+	public Double getDistance(Unit source, Unit destination) {
 		double distX = destination.getPos().getX()-source.getPos().getX();
 		double distY = destination.getPos().getY()-source.getPos().getY();
 		return Math.sqrt(Math.pow(distX, 2)+Math.pow(distY, 2));
 	}
 	
-	protected void printLayout(Layout fab) {
+	public void printLayout(Layout fab) {
 		for(int i=0; i<g.getSize(); i++){
 			for(int j=0; j<g.getSize(); j++){
-				System.out.println("Kante("+i+","+j+"): "+g.getWeight(units.get(i).getIndex(), units.get(j).getIndex()));
+				System.out.println("Kante("+i+","+j+"): "+g.getWeight(toolList.get(i).getIndex(), toolList.get(j).getIndex()));
 			}
 		}
+	}
+	
+	public Double getToolCoordX(int toolID) {
+		return this.toolList.get(toolID-1).getPos().getX();
+	}
+
+	public double getToolCoordY(int toolID) {
+		return this.toolList.get(toolID-1).getPos().getY();
+	}
+
+	public Unit getToolAt(int i) {
+
+		return toolList.get(i);
 	}
 }
