@@ -21,7 +21,7 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://www.w3schools.com algorithm_schema.xsd">
 
-    <iterations>2000</iterations>
+    <iterations>500</iterations>
 
     <construction>
         <insertion name="regretInsertion">
