@@ -65,11 +65,11 @@ public class Layout {
 	}
 	
 	public Double getToolCoordX(int toolID) {
-		return this.toolList.get(toolID-1).getPos().getX();
+		return this.toolList.get(toolID).getPos().getX();
 	}
 
 	public double getToolCoordY(int toolID) {
-		return this.toolList.get(toolID-1).getPos().getY();
+		return this.toolList.get(toolID).getPos().getY();
 	}
 
 	public Unit getToolAt(int i) {
