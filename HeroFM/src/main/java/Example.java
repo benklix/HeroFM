@@ -32,6 +32,7 @@ import jsprit.core.problem.vehicle.VehicleImpl.Builder;
 import jsprit.core.problem.vehicle.VehicleType;
 import jsprit.core.problem.vehicle.VehicleTypeImpl;
 import jsprit.core.reporting.SolutionPrinter;
+import jsprit.core.reporting.SolutionPrinter.Print;
 import jsprit.core.util.Coordinate;
 import jsprit.core.util.Solutions;
 import jsprit.util.Examples;
@@ -83,8 +84,8 @@ public class Example {
 		requestList.add(new Request(fabLayout.getToolAt(2), fabLayout.getToolAt(0), 1));
 		requestList.add(new Request(fabLayout.getToolAt(6), fabLayout.getToolAt(0), 1));
 		requestList.add(new Request(fabLayout.getToolAt(8), fabLayout.getToolAt(7), 1));
-//		requestList.add(new Request(fabLayout.getToolAt(6), fabLayout.getToolAt(7), 1));
-//		requestList.add(new Request(fabLayout.getToolAt(3), fabLayout.getToolAt(4), 1));
+		requestList.add(new Request(fabLayout.getToolAt(10), fabLayout.getToolAt(13), 1));
+		requestList.add(new Request(fabLayout.getToolAt(12), fabLayout.getToolAt(4), 1));
 		
 		/*
 		 * letzte Zielorte der Heros > ABSPEICHERN!
@@ -169,7 +170,7 @@ public class Example {
 		/*
 		 * print nRoutes and totalCosts of bestSolution
 		 */
-		SolutionPrinter.print(bestSolution);
+		SolutionPrinter.print(problem, bestSolution, Print.VERBOSE);
 		
 		/*
 		 * plot problem without solution
