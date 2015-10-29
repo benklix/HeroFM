@@ -24,8 +24,8 @@ public class Layout {
 	Tool tool9 = new Tool("9-MEA", 8, new Position(100,100));
 	Tool tool10 = new Tool("10-MEA", 9, new Position(200,100));
 	
-	Tool tool11 = new Tool("11-MEA", 10, new Position(200,200));
-	Tool tool12 = new Tool("12-MEA", 11, new Position(200,400));
+	Tool tool11 = new Tool("11-MEA", 10, new Position(400,100));
+	Tool tool12 = new Tool("12-MEA", 11, new Position(400,400));
 	
 	Tool tool13 = new Tool("13-MEA", 12, new Position(400,700));
 	Tool tool14 = new Tool("14-MEA", 13, new Position(100,200));

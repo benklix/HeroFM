@@ -121,7 +121,7 @@ public class Example {
 		 *
 		 */
 		for(int i=0; i<requestList.size(); i++) {
-	        String shipmentId = (i+1)+"-"+requestList.get(i).getSource().getName()+" > "+requestList.get(i).getDestination().getName();
+	        String shipmentId = (i+1)+"-"+requestList.get(i).getSource().getName()+">"+requestList.get(i).getDestination().getName();
 	        // Shipment kann mit Service-Zeiten u.A. beaufshlagt werden
 	        Shipment shipment = Shipment.Builder.newInstance(shipmentId).addSizeDimension(0, 1).setPickupLocation(loc(Coordinate.newInstance(requestList.get(i).getSource().getPos().getX(), requestList.get(i).getSource().getPos().getY()))).setDeliveryLocation(loc(Coordinate.newInstance(requestList.get(i).getDestination().getPos().getX(), requestList.get(i).getDestination().getPos().getY()))).build();
 	        vrpBuilder.addJob(shipment);
@@ -161,6 +161,28 @@ public class Example {
 			}
 		}
 		
+		/*
+		 * Pseudo-Programm zur Steuerung der heros
+		 */
+		for(Iterator<VehicleRoute> iterator=bestSolution.getRoutes().iterator(); iterator.hasNext(); ) {
+			VehicleRoute vehRoute = iterator.next();
+			for(int i=0; i<vehRoute.getTourActivities().getActivities().size(); i++) {
+				switch(vehRoute.getVehicle().getId()) {
+					case "hero-1":
+//						vehicle1.moveTo(vehRoute.getTourActivities().getActivities().get(i).getLocation().getCoordinate());
+//						vehicle1.doAction(vehRoute.getTourActivities().getActivities().get(i));
+						break;
+					case "hero-2":
+						break;
+					case "hero-3":
+						break;
+					default:
+						System.out.println("You should not get here...");
+						break;
+				}
+			}
+		}
+		
 				
 		/*
 		 * write out problem and solution to xml-file
@@ -186,7 +208,7 @@ public class Example {
 		solutionPlotter.plotShipments(true);
 		solutionPlotter.plot("output/enRoutePickupAndDeliveryWithMultipleLocationsExample_solution.png", "en-route pickup and delivery solution");
 		
-		new GraphStreamViewer(problem,Solutions.bestOf(solutions)).labelWith(Label.ACTIVITY).setRenderDelay(100).setRenderShipments(true).display();
+//		new GraphStreamViewer(problem,Solutions.bestOf(solutions)).labelWith(Label.ACTIVITY).setRenderDelay(100).setRenderShipments(true).display();
 		
 	}
 

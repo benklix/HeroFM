@@ -71,7 +71,7 @@
           </type>
      </vehicleTypes>
      <shipments>
-          <shipment id="1-3-FOT > 1-FOT">
+          <shipment id="1-3-FOT>1-FOT">
                <pickup>
                     <location>
                          <id>[x=100.0][y=10.0]</id>
@@ -102,7 +102,7 @@
                     <dimension index="0">1</dimension>
                </capacity-dimensions>
           </shipment>
-          <shipment id="2-7-BUF > 1-FOT">
+          <shipment id="2-7-BUF>1-FOT">
                <pickup>
                     <location>
                          <id>[x=10.0][y=100.0]</id>
@@ -133,7 +133,7 @@
                     <dimension index="0">1</dimension>
                </capacity-dimensions>
           </shipment>
-          <shipment id="3-9-MEAS > 8-WASH">
+          <shipment id="3-9-MEA>8-WAS">
                <pickup>
                     <location>
                          <id>[x=100.0][y=100.0]</id>
@@ -164,38 +164,120 @@
                     <dimension index="0">1</dimension>
                </capacity-dimensions>
           </shipment>
+          <shipment id="4-11-MEA>14-MEA">
+               <pickup>
+                    <location>
+                         <id>[x=200.0][y=200.0]</id>
+                         <coord x="200.0" y="200.0"/>
+                    </location>
+                    <duration>0.0</duration>
+                    <timeWindows>
+                         <timeWindow>
+                              <start>0.0</start>
+                              <end>1.7976931348623157E308</end>
+                         </timeWindow>
+                    </timeWindows>
+               </pickup>
+               <delivery>
+                    <location>
+                         <id>[x=100.0][y=200.0]</id>
+                         <coord x="100.0" y="200.0"/>
+                    </location>
+                    <duration>0.0</duration>
+                    <timeWindows>
+                         <timeWindow>
+                              <start>0.0</start>
+                              <end>1.7976931348623157E308</end>
+                         </timeWindow>
+                    </timeWindows>
+               </delivery>
+               <capacity-dimensions>
+                    <dimension index="0">1</dimension>
+               </capacity-dimensions>
+          </shipment>
+          <shipment id="5-13-MEA>5-ETC">
+               <pickup>
+                    <location>
+                         <id>[x=400.0][y=700.0]</id>
+                         <coord x="400.0" y="700.0"/>
+                    </location>
+                    <duration>0.0</duration>
+                    <timeWindows>
+                         <timeWindow>
+                              <start>0.0</start>
+                              <end>1.7976931348623157E308</end>
+                         </timeWindow>
+                    </timeWindows>
+               </pickup>
+               <delivery>
+                    <location>
+                         <id>[x=40.0][y=40.0]</id>
+                         <coord x="40.0" y="40.0"/>
+                    </location>
+                    <duration>0.0</duration>
+                    <timeWindows>
+                         <timeWindow>
+                              <start>0.0</start>
+                              <end>1.7976931348623157E308</end>
+                         </timeWindow>
+                    </timeWindows>
+               </delivery>
+               <capacity-dimensions>
+                    <dimension index="0">1</dimension>
+               </capacity-dimensions>
+          </shipment>
      </shipments>
      <solutions>
           <solution>
-               <cost>210.0</cost>
+               <cost>1614.518130849389</cost>
                <routes>
                     <route>
                          <driverId>noDriver</driverId>
                          <vehicleId>hero-2</vehicleId>
                          <start>0.0</start>
                          <act type="pickupShipment">
-                              <shipmentId>3-9-MEAS > 8-WASH</shipmentId>
+                              <shipmentId>3-9-MEA>8-WAS</shipmentId>
                               <arrTime>0.0</arrTime>
                               <endTime>0.0</endTime>
                          </act>
-                         <act type="deliverShipment">
-                              <shipmentId>3-9-MEAS > 8-WASH</shipmentId>
-                              <arrTime>30.0</arrTime>
-                              <endTime>30.0</endTime>
+                         <act type="pickupShipment">
+                              <shipmentId>4-11-MEA>14-MEA</shipmentId>
+                              <arrTime>141.4213562373095</arrTime>
+                              <endTime>141.4213562373095</endTime>
                          </act>
-                         <end>30.0</end>
+                         <act type="pickupShipment">
+                              <shipmentId>5-13-MEA>5-ETC</shipmentId>
+                              <arrTime>679.9378369507599</arrTime>
+                              <endTime>679.9378369507599</endTime>
+                         </act>
+                         <act type="deliverShipment">
+                              <shipmentId>4-11-MEA>14-MEA</shipmentId>
+                              <arrTime>1263.03302643529</arrTime>
+                              <endTime>1263.03302643529</endTime>
+                         </act>
+                         <act type="deliverShipment">
+                              <shipmentId>3-9-MEA>8-WAS</shipmentId>
+                              <arrTime>1367.4360915243954</arrTime>
+                              <endTime>1367.4360915243954</endTime>
+                         </act>
+                         <act type="deliverShipment">
+                              <shipmentId>5-13-MEA>5-ETC</shipmentId>
+                              <arrTime>1434.518130849389</arrTime>
+                              <endTime>1434.518130849389</endTime>
+                         </act>
+                         <end>1434.518130849389</end>
                     </route>
                     <route>
                          <driverId>noDriver</driverId>
                          <vehicleId>hero-1</vehicleId>
                          <start>0.0</start>
                          <act type="pickupShipment">
-                              <shipmentId>1-3-FOT > 1-FOT</shipmentId>
+                              <shipmentId>1-3-FOT>1-FOT</shipmentId>
                               <arrTime>0.0</arrTime>
                               <endTime>0.0</endTime>
                          </act>
                          <act type="deliverShipment">
-                              <shipmentId>1-3-FOT > 1-FOT</shipmentId>
+                              <shipmentId>1-3-FOT>1-FOT</shipmentId>
                               <arrTime>90.0</arrTime>
                               <endTime>90.0</endTime>
                          </act>
@@ -206,12 +288,12 @@
                          <vehicleId>hero-3</vehicleId>
                          <start>0.0</start>
                          <act type="pickupShipment">
-                              <shipmentId>2-7-BUF > 1-FOT</shipmentId>
+                              <shipmentId>2-7-BUF>1-FOT</shipmentId>
                               <arrTime>0.0</arrTime>
                               <endTime>0.0</endTime>
                          </act>
                          <act type="deliverShipment">
-                              <shipmentId>2-7-BUF > 1-FOT</shipmentId>
+                              <shipmentId>2-7-BUF>1-FOT</shipmentId>
                               <arrTime>90.0</arrTime>
                               <endTime>90.0</endTime>
                          </act>
@@ -220,35 +302,55 @@
                </routes>
           </solution>
           <solution>
-               <cost>210.0</cost>
+               <cost>1614.518130849389</cost>
                <routes>
                     <route>
                          <driverId>noDriver</driverId>
                          <vehicleId>hero-2</vehicleId>
                          <start>0.0</start>
                          <act type="pickupShipment">
-                              <shipmentId>3-9-MEAS > 8-WASH</shipmentId>
+                              <shipmentId>3-9-MEA>8-WAS</shipmentId>
                               <arrTime>0.0</arrTime>
                               <endTime>0.0</endTime>
                          </act>
-                         <act type="deliverShipment">
-                              <shipmentId>3-9-MEAS > 8-WASH</shipmentId>
-                              <arrTime>30.0</arrTime>
-                              <endTime>30.0</endTime>
+                         <act type="pickupShipment">
+                              <shipmentId>4-11-MEA>14-MEA</shipmentId>
+                              <arrTime>141.4213562373095</arrTime>
+                              <endTime>141.4213562373095</endTime>
                          </act>
-                         <end>30.0</end>
+                         <act type="pickupShipment">
+                              <shipmentId>5-13-MEA>5-ETC</shipmentId>
+                              <arrTime>679.9378369507599</arrTime>
+                              <endTime>679.9378369507599</endTime>
+                         </act>
+                         <act type="deliverShipment">
+                              <shipmentId>4-11-MEA>14-MEA</shipmentId>
+                              <arrTime>1263.03302643529</arrTime>
+                              <endTime>1263.03302643529</endTime>
+                         </act>
+                         <act type="deliverShipment">
+                              <shipmentId>3-9-MEA>8-WAS</shipmentId>
+                              <arrTime>1367.4360915243954</arrTime>
+                              <endTime>1367.4360915243954</endTime>
+                         </act>
+                         <act type="deliverShipment">
+                              <shipmentId>5-13-MEA>5-ETC</shipmentId>
+                              <arrTime>1434.518130849389</arrTime>
+                              <endTime>1434.518130849389</endTime>
+                         </act>
+                         <end>1434.518130849389</end>
                     </route>
                     <route>
                          <driverId>noDriver</driverId>
                          <vehicleId>hero-1</vehicleId>
                          <start>0.0</start>
                          <act type="pickupShipment">
-                              <shipmentId>1-3-FOT > 1-FOT</shipmentId>
+                              <shipmentId>1-3-FOT>1-FOT</shipmentId>
                               <arrTime>0.0</arrTime>
                               <endTime>0.0</endTime>
                          </act>
                          <act type="deliverShipment">
-                              <shipmentId>1-3-FOT > 1-FOT</shipmentId>
+                              <shipmentId>1-3-FOT>1-FOT</shipmentId>
                               <arrTime>90.0</arrTime>
                               <endTime>90.0</endTime>
                          </act>
@@ -259,12 +361,12 @@
                          <vehicleId>hero-3</vehicleId>
                          <start>0.0</start>
                          <act type="pickupShipment">
-                              <shipmentId>2-7-BUF > 1-FOT</shipmentId>
+                              <shipmentId>2-7-BUF>1-FOT</shipmentId>
                               <arrTime>0.0</arrTime>
                               <endTime>0.0</endTime>
                          </act>
                          <act type="deliverShipment">
-                              <shipmentId>2-7-BUF > 1-FOT</shipmentId>
+                              <shipmentId>2-7-BUF>1-FOT</shipmentId>
                               <arrTime>90.0</arrTime>
                               <endTime>90.0</endTime>
                          </act>
